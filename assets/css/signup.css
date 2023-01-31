@@ -5,10 +5,11 @@
 body {
     font-family: "Karla", sans-serif !important;
     min-height: 100vh;
+    background-color: #f0f0f0 !important;
 }
 
 a.navbar-brand {
-    color: #B22222!important;
+    color: #2972b3!important;
     font-size: 25px!important;
     font-weight: bold!important;
 }
@@ -22,13 +23,25 @@ a.navbar-brand {
     box-shadow: none;
 }
 
-.btn-primary {
-    background-color: #B22222!important;
-    border-color: #B22222!important;
+.text-select {
+    /* color: #000; */
+    /* font-weight: bold; */
+    font-size: 0.7rem;
 }
 
-.btn-primary:hover {
-    background-color: #941111!important;
+.btn-regis {
+    background-color: #2972b3!important;
+    border-color: #2972b3!important;
+    color: #fff;
+}
+
+.btn-regis:hover {
+    background-color: #3886ca!important;
+    color: #fff;
+}
+
+footer {
+    background-color: black;
 }
 
 footer .copyright {
@@ -36,4 +49,8 @@ footer .copyright {
     text-align: center!important;
     font-size: 10px!important;
     font-weight: bold!important;
+}
+
+.text-footer {
+    color: #fff;
 }

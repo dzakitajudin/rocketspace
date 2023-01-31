@@ -2,10 +2,11 @@
 
     // setting db lokal
     // $host = '127.0.0.1';
-    $host = 'mysql'; // container name database env in docker
+    // change with your env
+    $host = '127.0.0.1:8889';
     $login = 'root';
-    $pass = 'pass';
-    $db = 'mastersystem';
+    $pass = 'root';
+    $db = 'rocketspace';
     $port = '3306';
 
     // create connection

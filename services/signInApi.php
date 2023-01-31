@@ -26,16 +26,16 @@
 
 
         // set property values
-        $Email = isset($data->Email) ? $data->Email : '';
-        $Password = isset($data->Password) ? $data->Password : '';
+        $employee_id = isset($data->employee_id) ? $data->employee_id : '';
+        $password = isset($data->password) ? $data->password : '';
         
 
         // VALIDATION
         // check empty Email
-        if (empty($Email) || $Email == "") {
+        if (empty($employee_id) || $employee_id == "") {
             $response = array(
                 'status' => 0,
-                'message' => 'Email is required'
+                'message' => 'Employee ID is required'
             );
 
             http_response_code(200);
@@ -44,7 +44,7 @@
         }
 
         // check empty Password
-        if (empty($Password) || $Password == "") {
+        if (empty($password) || $password == "") {
             $response = array(
                 'status' => 0,
                 'message' => 'Password is required'
@@ -56,56 +56,67 @@
         }
 
         // query sql to get data users
-        $sql = $conn->query("SELECT * FROM users WHERE email = '".$Email."' LIMIT 1");
+        $sql = $conn->query("SELECT * FROM employee WHERE employee_id = '".$employee_id."' LIMIT 1");
         $user = $sql->fetch_assoc();
         
         // check valid password
-        if (password_verify($Password, $user['password'])) {
-            
-            // if correct, then return given jwt and display message success
-
-            $key = "cvbrb84gd38x3b3f73578gf3cbnxjffhfgv7";
+        if (!empty($user)) {
+            if (password_verify($password, $user['pass'])) {
                 
-            $alg = 'HS256';
+                // if correct, then return given jwt and display message success
 
-            $issuedAt = time();
-            $expirationTime = $issuedAt + 3600; // jwt valid for 60 minutes from the issued time
+                $key = "cvbrb84gd38x3b3f73578gf3cbnxjffhfgv7";
+                    
+                $alg = 'HS256';
 
-            $token = array(
-                "email" => $Email,
-                "iat" => $issuedAt,
-                "exp" => $expirationTime
-            );
+                $issuedAt = time();
+                $expirationTime = $issuedAt + 3600; // jwt valid for 60 minutes from the issued time
+
+                $token = array(
+                    "email" => $Email,
+                    "iat" => $issuedAt,
+                    "exp" => $expirationTime
+                );
 
 
-            // generate jwt
-            $jwt = JWT::encode($token, $key, $alg);
+                // generate jwt
+                $jwt = JWT::encode($token, $key, $alg);
 
 
-            $arr_token = array(
-                'firstname' => $user['first_name'],
-                'lastname' => $user['last_name'],
-                'token' => $jwt,
-                'iat' => $issuedAt,
-                'expire' => $expirationTime
-            );
-            $obj_token = $arr_token;
+                $arr_token = array(
+                    'firstname' => $user['firstname'],
+                    'lastname' => $user['lastname'],
+                    'token' => $jwt,
+                    'iat' => $issuedAt,
+                    'expire' => $expirationTime
+                );
+                $obj_token = $arr_token;
 
-            $response = array(
-                'status' => 1,
-                'message' => 'Login success',
-                'data' => array($obj_token)
-            );
+                $response = array(
+                    'status' => 1,
+                    'message' => 'Login success',
+                    'data' => array($obj_token)
+                );
 
-            http_response_code(200);
+                http_response_code(200);
 
-            echo json_encode($response);
+                echo json_encode($response);
+            } else {
+                $response = array(
+                    'status' => 0,
+                    'message' => "password not match"
+                );
+    
+                http_response_code(200);
+    
+                echo json_encode($response);
+            }
         } else {
             
             // if doesn't exist in db
             $response = array(
                 'status' => 0,
-                'message' => "email and password not match"
+                'message' => "employee id does not exist"
             );
 
             http_response_code(200);

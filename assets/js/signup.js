@@ -28,19 +28,24 @@ $(function () {
 // process login
 function check_registration() {
     $.ajax({
-        url : 'http://localhost/mastersystem/services/signUpApi.php',
+        url : 'http://localhost:8888/rocketspace/services/signUpApi.php',
         dataType : 'json',
         headers: {'Accept': 'application/json'},
         type : 'POST',
         data : JSON.stringify({
-            FirstName: $('#firstName').val(),
-            LastName: $('#lastName').val(),
-            Email: $('#email').val(),
-            PhoneNumber: $('#phoneNumber').val(),
-            Gender: $('input[type=radio]:checked').val(),
-            BirthDate: $('#birthday').val(),
-            Password: $('#password').val(),
-            ConfirmPassword: $('#passwordConfirmation').val(),
+            firstName: $('#firstName').val(),
+            lastName: $('#lastName').val(),
+            address: $('#address').val(),
+            email: $('#email').val(),
+            phoneNumber: $('#phoneNumber').val(),
+            gender: $('input[type=radio]:checked').val(),
+            birthDate: $('#birthday').val(),
+            department: $('#department').val(),
+            division: $('#division').val(),
+            level: $('#level').val(),
+            level: $('#role').val(),
+            password: $('#password').val(),
+            confirmPassword: $('#passwordConfirmation').val(),
         }),
         crossDomain : true,
         xhrFields: {
@@ -58,6 +63,9 @@ function check_registration() {
           }
           if (data.message == 'Last Name is required') {
               $('#modal-regis-lastname-required').modal('show');
+          }
+          if (data.message == 'Address is required') {
+            $('#modal-regis-address-required').modal('show');
           }
           if (data.message == 'Email is required') {
               $('#modal-regis-email-required').modal('show');
@@ -79,6 +87,15 @@ function check_registration() {
           }
           if (data.message == 'Birth Date is invalid format (dd/mm/yyyy)') {
             $('#modal-regis-birthdate-invalid').modal('show');
+          }
+          if (data.message == 'Department is required') {
+            $('#modal-regis-department-required').modal('show');
+          }
+          if (data.message == 'Level is required') {
+            $('#modal-regis-level-required').modal('show');
+          }
+          if (data.message == 'Role is required') {
+            $('#modal-regis-role-required').modal('show');
           }
           if (data.message == 'Password is required') {
             $('#modal-regis-password-required').modal('show');
@@ -104,6 +121,6 @@ function check_registration() {
 
 function redirect_login() {
     $('body').fadeOut(1000, function() {
-        window.location.href = "./login.php";
+        window.location.href = "../index.php";
     });
 }
