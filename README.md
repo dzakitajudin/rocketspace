@@ -22,6 +22,8 @@ Create company profile Website using Javascript jQuery, HTML, Bootstraps, and PH
 ## Get Started
 - git clone https://github.com/dzakitajudin/rocketspace.git
 
+For completed instruction please read Deployment Guide doc
+
 ## API Testing
 You can test api manualy using postman
 - Open your postman application
