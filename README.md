@@ -1,6 +1,9 @@
 ## Rocket Space Company Website
 Create company profile Website using Javascript jQuery, HTML, Bootstraps, and PHP native.
 
+## Overview
+![alt text](https://user-images.githubusercontent.com/32503637/215702769-f95fd96b-3461-423c-af31-dc68c4f7fdd8.png)
+
 ## Technology Stack
 - [PHP 7.x](https://www.php.net/)
 - [MySQL 5](https://www.mysql.com/)
